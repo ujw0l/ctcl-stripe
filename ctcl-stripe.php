@@ -28,11 +28,17 @@ if(class_exists('ctclBillings')){
      */
     public $settingFields = 'ctcl_stripe_setting';
 
+    /**
+     * Stripe file path
+     */
+    public $stripeFilePath;
 
     public function __construct(){
+        $this->stripeFilePath = plugin_dir_url(__FILE__);
         self::displayOptionsUser();
         self::adminPanelHtml();
         self::registerOptions();
+        self::requiredWpAction();
     }
 
     /**
@@ -48,6 +54,31 @@ public function registerOptions(){
     register_setting($this->settingFields,'ctc_stripe_live_secret_key');
 
 }
+
+/**
+ * 
+ */
+public function requiredWpAction(){
+    add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendJs' ));
+    add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendCss' ));
+}
+/**
+   * eneque frontend JS files
+   */
+
+  public function enequeFrontendJs(){
+    wp_enqueue_script('ctclStripeJs', $this->stripeFilePath."js/{$this->paymentId}.js");
+    wp_localize_script('ctclStripeJs','ctclParams',array());
+   }
+
+   /**
+   * eneque frontend CSS files
+   */
+
+  public function enequeFrontendCss(){
+    wp_enqueue_style( 'ctclStripeCss', $this->stripeFilePath."js/{$this->paymentId}.js"); 
+}
+
 
       /**
      * create admin panel content
@@ -97,7 +128,7 @@ public function registerOptions(){
     function sample_admin_notice__success() {
         ?>
         <div class="notice notice-error is-dismissible">
-            <p><?php _e( 'Plugin requires CTC plugin to work, please install it.', 'ctcl-stripe' ); ?></p>
+            <p><?php _e( 'Plugin requires CTC Lite plugin to work, please install it.', 'ctcl-stripe' ); ?></p>
         </div>
         <?php
     }
