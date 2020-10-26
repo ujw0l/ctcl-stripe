@@ -67,7 +67,7 @@ public function requiredWpAction(){
    */
 
   public function enequeFrontendJs(){
-    wp_enqueue_script('ctclStripeJs', $this->stripeFilePath."js/{$this->paymentId}.js");
+    wp_enqueue_script('ctclStripeJs', "{$this->stripeFilePath}js/{$this->paymentId}.js");
     wp_localize_script('ctclStripeJs','ctclParams',array());
    }
 
@@ -76,7 +76,7 @@ public function requiredWpAction(){
    */
 
   public function enequeFrontendCss(){
-    wp_enqueue_style( 'ctclStripeCss', $this->stripeFilePath."js/{$this->paymentId}.js"); 
+    wp_enqueue_style( 'ctclStripeCss', "{$this->stripeFilePath}js/{$this->paymentId}.js"); 
 }
 
 

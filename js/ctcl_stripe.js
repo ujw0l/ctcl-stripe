@@ -1,1 +1,0 @@
-alert('aye stripe');
