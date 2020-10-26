@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name:CTCL Stripe
- Plugin URI:https://github.com/ujw0l/ctc-rating
+ Plugin URIhttps://github.com/ujw0l/ctcl-stripe/blob/main/ctcl-stripe.php
  Description: CT commerce lite stripe payments addon, ecommerce
  Version: 1.0.0
  Author: Ujwol Bastakoti
