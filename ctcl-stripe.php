@@ -56,14 +56,14 @@ public function registerOptions(){
 }
 
 /**
- * 
+ * Required wp actions
  */
 public function requiredWpAction(){
     add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendJs' ));
     add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendCss' ));
 }
 /**
-   * eneque frontend JS files
+   * Eneque frontend JS files
    */
 
   public function enequeFrontendJs(){
@@ -72,7 +72,7 @@ public function requiredWpAction(){
    }
 
    /**
-   * eneque frontend CSS files
+   * Eneque frontend CSS files
    */
 
   public function enequeFrontendCss(){
@@ -81,7 +81,7 @@ public function requiredWpAction(){
 
 
       /**
-     * create admin panel content
+     * Create admin panel content
      */
     public function adminPanelHtml(){
 
@@ -125,12 +125,12 @@ public function requiredWpAction(){
 
 }else{
 
-    function sample_admin_notice__success() {
-        ?>
-        <div class="notice notice-error is-dismissible">
-            <p><?php _e( 'Plugin requires CTC Lite plugin to work, please install it.', 'ctcl-stripe' ); ?></p>
-        </div>
-        <?php
-    }
-    add_action( 'admin_notices', 'sample_admin_notice__success' );
+   /**
+    * If main plugin CTC lite is not installed
+    */
+    add_action( 'admin_notices', function(){
+        echo '<div class="notice notice-error is-dismissible"><p>';
+         _e( 'CTCL Stripe Plugin requires CTC Lite plugin installed and activated to work, please od so first.', 'ctcl-stripe' ); 
+        echo '</p></div>';
+    } );
 }
