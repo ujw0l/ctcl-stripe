@@ -14,12 +14,12 @@ if(class_exists('ctclBillings')){
     class ctclStripe extends ctclBillings{
 
     /**
-     * payment id
+     * Payment id
      */
     public $paymentId = 'ctcl_stripe';
 
     /**
-     * payment name
+     * Payment name
      */
     public $paymentName = 'Stripe';
 
@@ -39,6 +39,7 @@ if(class_exists('ctclBillings')){
         self::adminPanelHtml();
         self::registerOptions();
         self::requiredWpAction();
+        
     }
 
     /**
@@ -54,6 +55,23 @@ public function registerOptions(){
     register_setting($this->settingFields,'ctc_stripe_live_secret_key');
 
 }
+/**
+ * 
+ */
+public function displayOptionsUser(){
+
+    if('1'== get_option('ctcl_activate_stripe')):
+        add_filter('ctcl_payment_options',function($val){
+            array_push($val,array(
+                                    'id'=>$this->paymentId,
+                                    'name'=>$this->paymentName,
+                                    'html'=>$this->frontendHtml()
+            ));
+            return $val; 
+        },10,1);
+    endif;
+
+}
 
 /**
  * Required wp actions
@@ -67,9 +85,11 @@ public function requiredWpAction(){
    */
 
   public function enequeFrontendJs(){
-    wp_enqueue_script('ctclStripeJs', "{$this->stripeFilePath}js/{$this->paymentId}.js");
-    wp_localize_script('ctclStripeJs','ctclParams',array());
-   }
+    if('1'== get_option('ctcl_activate_stripe')):
+         wp_enqueue_script('ctclStripeJs', "{$this->stripeFilePath}js/{$this->paymentId}.js");
+         wp_localize_script('ctclStripeJs','ctclStripeParams',array('stripePubKey'=>'1'== get_option('ctcl_stripe_test_mode')?get_option('ctc_stripe_test_publishable_key'):get_option('ctc_stripe_live_publishable_key')));
+    endif;    
+}
 
    /**
    * Eneque frontend CSS files
@@ -112,10 +132,23 @@ public function requiredWpAction(){
             
 
             $html .= '</div>';
-            array_push($val,array('settingFields'=>$this->settingFields,'formHeader'=>__("Stripe Payment",'ctcl-stripe'),'formSetting'=>'ctcl_payment_setting','html'=>$html));
+            array_push($val,array(
+                                    'settingFields'=>$this->settingFields,
+                                    'formHeader'=>__("Stripe Payment",'ctcl-stripe'),
+                                    'formSetting'=>'ctcl_payment_setting','html'=>$html
+                                 )
+                                );
       return $val;
         },30,1);
     }
+
+    /**
+      * html for frontend
+      */
+      public function frontendHtml(){
+      
+      return '<div id="ctcl-stripe-card-el"></div>';
+      }
 
     }
 
