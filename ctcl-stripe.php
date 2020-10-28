@@ -86,7 +86,8 @@ public function requiredWpAction(){
 
   public function enequeFrontendJs(){
     if('1'== get_option('ctcl_activate_stripe')):
-         wp_enqueue_script('ctclStripeJs', "{$this->stripeFilePath}js/{$this->paymentId}.js");
+        wp_enqueue_script('ctclStripe','https://js.stripe.com/v3/');
+         wp_enqueue_script('ctclStripeJs', "{$this->stripeFilePath}js/{$this->paymentId}.js",array('ctclStripe'));
          wp_localize_script('ctclStripeJs','ctclStripeParams',array('stripePubKey'=>'1'== get_option('ctcl_stripe_test_mode')?get_option('ctc_stripe_test_publishable_key'):get_option('ctc_stripe_live_publishable_key')));
     endif;    
 }
