@@ -11,6 +11,8 @@
 */
 if(class_exists('ctclBillings')){
 
+    require_once('stripe-php/init.php');
+    
     class ctclStripe extends ctclBillings{
 
     /**
@@ -39,6 +41,7 @@ if(class_exists('ctclBillings')){
         self::adminPanelHtml();
         self::registerOptions();
         self::requiredWpAction();
+        add_filter('ctcl_process_payment_'.$this->paymentId ,array($this,'processPayment'));
         
     }
 
@@ -144,10 +147,33 @@ public function requiredWpAction(){
     }
 
     /**
+     * Process payment 
+     */
+
+     public function processPayment($val){
+      
+        $stripeSecKey = '1'== get_option('ctcl_stripe_test_mode')?get_option('ctc_stripe_test_secret_key'):get_option('ctc_stripe_live_secret_key'); 
+        \Stripe\Stripe::setApiKey( $stripeSecKey);
+        
+
+        $stripeAmount = round($val['sub-total']*100);
+       
+        $charge = \Stripe\Charge::create([
+            'amount' => $stripeAmount ,
+            'currency' => get_option('ctcl_currency'),
+            'source' => $val['stripe_token'],
+            'receipt_email' =>$val['checkout-email-address']
+            
+    ]);
+        $val['charge_result']= !empty($charge->id) ? TRUE :FALSE;
+        $val['failure_message'] = empty($charge->id) ? __("Failed to charge your card."):'';
+        return $val;
+     }
+
+    /**
       * html for frontend
       */
       public function frontendHtml(){
-      
       return '<div id="ctcl-stripe-card-el"></div>';
       }
 
