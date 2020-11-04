@@ -100,7 +100,7 @@ public function requiredWpAction(){
    */
 
   public function enequeFrontendCss(){
-    wp_enqueue_style( 'ctclStripeCss', "{$this->stripeFilePath}js/{$this->paymentId}.js"); 
+    wp_enqueue_style( 'ctclStripeCss', "{$this->stripeFilePath}css/{$this->paymentId}.css"); 
 }
 
 
@@ -166,7 +166,7 @@ public function requiredWpAction(){
             
     ]);
         $val['charge_result']= !empty($charge->id) ? TRUE :FALSE;
-        $val['failure_message'] = empty($charge->id) ? __("Failed to charge your card."):'';
+        $val['failure_message'] = empty($charge->id) ? __("Failed to charge your card.",'ctcl-stripe'):'';
         return $val;
      }
 
