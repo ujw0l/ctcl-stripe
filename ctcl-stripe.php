@@ -148,6 +148,8 @@ public function requiredWpAction(){
 
     /**
      * Process payment 
+     * 
+     * @param $val value from filter to be modified
      */
 
      public function processPayment($val){
