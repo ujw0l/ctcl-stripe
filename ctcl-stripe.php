@@ -192,7 +192,8 @@ public function requiredWpAction(){
     */
     add_action( 'admin_notices', function(){
         echo '<div class="notice notice-error is-dismissible"><p>';
-         _e( 'CTCL Stripe Plugin requires CTC Lite plugin installed and activated to work, please od so first.', 'ctcl-stripe' ); 
+         _e( 'CTCL Stripe Plugin requires CTC Lite plugin installed and activated to work, please od so first.', 'ctcl-stripe' );
+         echo '<a href="https://wordpress.org/plugins/ctc-lite">'.__('Click Here to download it','ctcl-stripe').' </a>'; 
         echo '</p></div>';
     } );
 }
