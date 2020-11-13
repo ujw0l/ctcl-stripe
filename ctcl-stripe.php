@@ -187,14 +187,14 @@ public function requiredWpAction(){
 
 
 }else{
-
+add_thickbox();
    /**
     * If main plugin CTC lite is not installed
     */
     add_action( 'admin_notices', function(){
         echo '<div class="notice notice-error is-dismissible"><p>';
-         _e( 'CTCL Stripe Plugin requires CTC Lite plugin installed and activated to work, please od so first.', 'ctcl-stripe' );
-         echo '<a href="https://wordpress.org/plugins/ctc-lite">'.__('Click Here to download it','ctcl-stripe').' </a>'; 
+         _e( 'CTCL Stripe Plugin requires CTC Lite plugin installed and activated to work, please do so first.', 'ctcl-stripe' );
+         echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctc-lite&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-phone-pay').' </a>'; 
         echo '</p></div>';
     } );
 }
