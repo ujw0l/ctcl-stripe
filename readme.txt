@@ -22,7 +22,7 @@ e.g.
 4. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
 
 == Screenshots ==
-
+1. Admin Panel 
 
 == Changelog ==
 

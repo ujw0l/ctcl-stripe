@@ -118,7 +118,7 @@ public function requiredWpAction(){
             $liveSecKey = !empty(get_option('ctc_stripe_live_secret_key'))? get_option('ctc_stripe_live_secret_key'):'';
 
             $html = '<div class="ctcl-content-display ctcl-stripe-settings">';
-            $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-cash-on-deblivery"  class="ctcl-cash-on-delivery-label">'.__('Activate Stripe :','ctcl-stripe').'</label>';
+            $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-activate-stripe"  class="ctcl-activate-stripe-label">'.__('Activate Stripe :','ctcl-stripe').'</label>';
             $html .= "<span><input id='ctcl-activate-stripe' {$activate} type='checkbox' name='ctcl_activate_stripe' value='1'></span></div>";
 
             $html .=  '<div class="ctcl-business-setting-row"><label for"ctc-stripe-test-publishable-key"  class="ctc-stripe-test-publishable-key-label">'.__('Test Publishable Key :','ctcl-stripe').'</label>';
@@ -139,7 +139,8 @@ public function requiredWpAction(){
             array_push($val,array(
                                     'settingFields'=>$this->settingFields,
                                     'formHeader'=>__("Stripe Payment",'ctcl-stripe'),
-                                    'formSetting'=>'ctcl_payment_setting','html'=>$html
+                                    'formSetting'=>'ctcl_payment_setting',
+                                    'html'=>$html
                                  )
                                 );
       return $val;
