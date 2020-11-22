@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     if (null != document.querySelector('#ctcl-stripe-card-el')) {
         // Create a Stripe client.
         var stripe = Stripe(ctclStripeParams.stripePubKey);

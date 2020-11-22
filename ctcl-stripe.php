@@ -23,7 +23,7 @@ if(class_exists('ctclBillings')){
     /**
      * Payment name
      */
-    public $paymentName = 'Stripe';
+    public $paymentName;
 
     /**
      * Setting Fields
@@ -37,6 +37,7 @@ if(class_exists('ctclBillings')){
 
     public function __construct(){
         $this->stripeFilePath = plugin_dir_url(__FILE__);
+        $this->paymentName = !empty(get_option('ctcl_stripe_display_label'))?get_option('ctcl_stripe_display_label'):'Stripe';
         self::displayOptionsUser();
         self::adminPanelHtml();
         self::registerOptions();
@@ -56,6 +57,7 @@ public function registerOptions(){
     register_setting($this->settingFields,'ctc_stripe_test_secret_key');
     register_setting($this->settingFields,'ctc_stripe_live_publishable_key');
     register_setting($this->settingFields,'ctc_stripe_live_secret_key');
+    register_setting($this->settingFields,'ctcl_stripe_display_label');
 
 }
 /**
@@ -120,6 +122,9 @@ public function requiredWpAction(){
             $html = '<div class="ctcl-content-display ctcl-stripe-settings">';
             $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-activate-stripe"  class="ctcl-activate-stripe-label">'.__('Activate Stripe :','ctcl-stripe').'</label>';
             $html .= "<span><input id='ctcl-activate-stripe' {$activate} type='checkbox' name='ctcl_activate_stripe' value='1'></span></div>";
+
+            $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-stripe-display-label"  class="ctcl-stripe-display-label-label">'.__('Frontend Option Label :','ctcl-stripe').' </label>';
+            $html .= "<span><input id='ctcl-stripe-display-label' type='text' name='ctcl_stripe_display_label' value='".get_option('ctcl_stripe_display_label')."'></span></div><br>";
 
             $html .=  '<div class="ctcl-business-setting-row"><label for"ctc-stripe-test-publishable-key"  class="ctc-stripe-test-publishable-key-label">'.__('Test Publishable Key :','ctcl-stripe').'</label>';
             $html .= "<span><input id='ctc-stripe-test-publishable-key' type='text' name='ctc_stripe_test_publishable_key' value='{$testPubKey}'></span></div>";
