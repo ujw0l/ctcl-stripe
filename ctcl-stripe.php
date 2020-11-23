@@ -38,16 +38,36 @@ if(class_exists('ctclBillings')){
     public function __construct(){
         $this->stripeFilePath = plugin_dir_url(__FILE__);
         $this->paymentName = !empty(get_option('ctcl_stripe_display_label'))?get_option('ctcl_stripe_display_label'):'Stripe';
+
+      
         self::displayOptionsUser();
         self::adminPanelHtml();
         self::registerOptions();
         self::requiredWpAction();
         add_filter('ctcl_process_payment_'.$this->paymentId ,array($this,'processPayment'));
+        register_deactivation_hook(__FILE__,  array($this,'stripeDeactivate'));
         
     }
 
+
+
+/**
+ * Run on deactivation 
+ */
+public function stripeDeactivate(){
+
+   delete_option('ctcl_activate_stripe');
+   delete_option('ctcl_stripe_test_mode');
+   delete_option('ctc_stripe_test_publishable_key');
+   delete_option('ctc_stripe_test_secret_key');
+   delete_option('ctc_stripe_live_publishable_key');
+   delete_option('ctc_stripe_live_secret_key');
+   delete_option('ctcl_stripe_display_label');
+}
+
+
     /**
-     * rgister form options
+     * Register form options
      */
 public function registerOptions(){
 
