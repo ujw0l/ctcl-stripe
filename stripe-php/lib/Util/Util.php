@@ -23,7 +23,7 @@ abstract class Util
         if (!\is_array($array)) {
             return false;
         }
-        if ($array === []) {
+        if ([] === $array) {
             return true;
         }
         if (\array_keys($array) !== \range(0, \count($array) - 1)) {
@@ -47,7 +47,7 @@ abstract class Util
         if (self::isList($resp)) {
             $mapped = [];
             foreach ($resp as $i) {
-                \array_push($mapped, self::convertToStripeObject($i, $opts));
+                $mapped[] = self::convertToStripeObject($i, $opts);
             }
 
             return $mapped;
@@ -74,7 +74,7 @@ abstract class Util
     public static function utf8($value)
     {
         if (null === self::$isMbstringAvailable) {
-            self::$isMbstringAvailable = \function_exists('mb_detect_encoding');
+            self::$isMbstringAvailable = \function_exists('mb_detect_encoding') && \function_exists('mb_convert_encoding');
 
             if (!self::$isMbstringAvailable) {
                 \trigger_error('It looks like the mbstring extension is not enabled. ' .
@@ -85,7 +85,7 @@ abstract class Util
         }
 
         if (\is_string($value) && self::$isMbstringAvailable && 'UTF-8' !== \mb_detect_encoding($value, 'UTF-8', true)) {
-            return \utf8_encode($value);
+            return mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
         }
 
         return $value;
@@ -138,7 +138,7 @@ abstract class Util
         if (static::isList($h)) {
             $results = [];
             foreach ($h as $v) {
-                \array_push($results, static::objectsToIds($v));
+                $results[] = static::objectsToIds($v);
             }
 
             return $results;
@@ -169,7 +169,7 @@ abstract class Util
         $pieces = [];
         foreach ($flattenedParams as $param) {
             list($k, $v) = $param;
-            \array_push($pieces, self::urlEncode($k) . '=' . self::urlEncode($v));
+            $pieces[] = self::urlEncode($k) . '=' . self::urlEncode($v);
         }
 
         return \implode('&', $pieces);

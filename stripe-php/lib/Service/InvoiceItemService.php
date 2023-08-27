@@ -15,7 +15,7 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Collection
+     * @return \Stripe\Collection<\Stripe\InvoiceItem>
      */
     public function all($params = null, $opts = null)
     {
@@ -23,8 +23,9 @@ class InvoiceItemService extends \Stripe\Service\AbstractService
     }
 
     /**
-     * Creates an item to be added to a draft invoice. If no invoice is specified, the
-     * item will be on the next invoice created for the customer specified.
+     * Creates an item to be added to a draft invoice (up to 250 items per invoice). If
+     * no invoice is specified, the item will be on the next invoice created for the
+     * customer specified.
      *
      * @param null|array $params
      * @param null|array|\Stripe\Util\RequestOptions $opts
