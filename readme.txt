@@ -4,7 +4,7 @@ Tags: stripe, ctc-lite
 Requires at least: 5.5.2
 Tested up to: 6.3.0
 Requires PHP: 7.4.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 Stripe extension for CTC Lite Ecommerce plugin
@@ -29,3 +29,6 @@ e.g.
 
 =1.0.0=
 *First Stable version
+
+=1.1.0=
+*Stripe SDK updated
