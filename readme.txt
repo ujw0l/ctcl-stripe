@@ -2,9 +2,9 @@
 Contributors: UjW0L
 Tags: stripe, ctc-lite
 Requires at least: 5.5.2
-Tested up to: 6.3.0
+Tested up to: 6.5
 Requires PHP: 7.4.9
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 
 Stripe extension for CTC Lite Ecommerce plugin
@@ -24,6 +24,7 @@ e.g.
 
 == Screenshots ==
 1. Admin Panel 
+2. Frontend display 
 
 == Changelog ==
 
@@ -32,3 +33,6 @@ e.g.
 
 =1.1.0=
 *Stripe SDK updated
+
+=1.2.0=
+*Error element display
