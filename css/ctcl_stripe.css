@@ -4,3 +4,7 @@
     padding:10px;
     border:2px dashed rgba(0,0,0,1);
 }
+#card-errors{
+    color:red;
+    font-size: 10px;
+}
