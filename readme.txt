@@ -10,13 +10,13 @@ License: GPLv2 or later
 Stripe extension for CT Commerce Lite Ecommerce plugin
 == Description ==
 
-Accept Stripe Payment with CT Commerce Lite ecommerce platform.
+Accept Stripe Payment with [CT Commerce Lite](https://wordpress.org/plugins/ctc-lite/) ecommerce platform.
 
 = To obtain your Stripe credentials =
 	*	Log in to your Stripe account at dashboard.stripe.com.
 	*	Navigate to Developers > API keys in the sidebar.
 	*	Here, you’ll find your Publishable Key and Secret Key under the “Standard keys” section.
-	*	For Webhook signing secret, go to Developers > Webhooks, click on an endpoint, and find the secret under the “Signing secret” section.
+
 
 == Installation ==
 
