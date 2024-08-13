@@ -3,7 +3,7 @@
  Plugin Name:CTCL Stripe
  Plugin URI : https://github.com/ujw0l/ctcl-stripe/blob/main/ctcl-stripe.php
  Description: CT commerce lite stripe payments addon, ecommerce
- Version: 1.2.0
+ Version: 1.2.1
  Author: Ujwol Bastakoti
  Author URI:https://ujw0l.github.io/
  Text Domain:  ctcl-stripe
@@ -140,6 +140,7 @@ public function requiredWpAction(){
             $liveSecKey = !empty(get_option('ctc_stripe_live_secret_key'))? get_option('ctc_stripe_live_secret_key'):'';
 
             $html = '<div class="ctcl-content-display ctcl-stripe-settings">';
+            $html .= '<div class="ctcl-business-setting-row" ><label>'.__('Stripe Credentials : ','ctcl-stripe').'</label><span> <a href="https://dashboard.stripe.com/developers" target="_blank">'.__('Get it here','ctcl-stripe').'</a></span></div>';
             $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-activate-stripe"  class="ctcl-activate-stripe-label">'.__('Activate Stripe :','ctcl-stripe').'</label>';
             $html .= "<span><input id='ctcl-activate-stripe' {$activate} type='checkbox' name='ctcl_activate_stripe' value='1'></span></div>";
 
