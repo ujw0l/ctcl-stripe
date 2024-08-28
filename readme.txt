@@ -1,5 +1,5 @@
 === CTCL Stripe ===
-Contributors: Ujwol Bastakoti
+Contributors: UjW0L
 Tags: Stripe, Payment Gateway, Ecommerce, CT Commerce Lite
 Tested up to: 6.6
 Stable tag: 1.2.1
