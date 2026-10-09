@@ -7,7 +7,10 @@ namespace Stripe\Service\Tax;
 /**
  * Service factory class for API resources in the Tax namespace.
  *
+ * @property AssociationService $associations
  * @property CalculationService $calculations
+ * @property LocationService $locations
+ * @property RegistrationService $registrations
  * @property SettingsService $settings
  * @property TransactionService $transactions
  */
@@ -17,7 +20,10 @@ class TaxServiceFactory extends \Stripe\Service\AbstractServiceFactory
      * @var array<string, string>
      */
     private static $classMap = [
+        'associations' => AssociationService::class,
         'calculations' => CalculationService::class,
+        'locations' => LocationService::class,
+        'registrations' => RegistrationService::class,
         'settings' => SettingsService::class,
         'transactions' => TransactionService::class,
     ];
